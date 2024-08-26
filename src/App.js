@@ -5,6 +5,7 @@ import IshikawaDiagram from './diagrams/ISHIKAWA';
 import ParetoChart from './diagrams/PARETO';
 import SixThinkingHats from './diagrams/SEISS.js';
 import CATWOEForm from './diagrams/CAT.js';
+import './App.css'; // Asegúrate de crear este archivo CSS
 
 function App() {
   const [problem, setProblem] = useState('');
@@ -24,31 +25,38 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <form>
-        <label>
-          Ingresa la problemática:
-          <input
-            type="text"
-            value={problem}
-            onChange={handleInputChange}
-            style={{ margin: '10px', padding: '5px' }}
-          />
-        </label>
-        <button type="submit" onClick={(e) => handleSubmit(e, 'FODA')}>Generar FODA</button>
-        <button type="submit" onClick={(e) => handleSubmit(e, 'CATWDA')}>Generar CATWDA</button>
-        <button type="submit" onClick={(e) => handleSubmit(e, 'ISHIKAWA')}>Generar ISHIKAWA</button>
-        <button type="submit" onClick={(e) => handleSubmit(e, 'PARETO')}>Generar D. PARETO</button>
-        <button type="submit" onClick={(e) => handleSubmit(e, 'SEIS')}>Generar 6 sombreros</button>
-      </form>
-
-      {/* Mostrar el componente seleccionado si hay una problemática */}
-      {selectedAnalysis === 'FODA' && <Foda problem={problem} />}
-      {selectedAnalysis === 'CATWDA' && <CATWOEForm />}
-      {selectedAnalysis === 'ISHIKAWA' && <IshikawaDiagram problem={problem} />}
-      {selectedAnalysis === 'PARETO' && <ParetoChart />}
-      {selectedAnalysis === 'SEIS' && <SixThinkingHats />}
-      {/* Puedes agregar otros componentes similares para CATWOE, etc. */}
+    <div className="app-container">
+      <header className="app-header">
+        <h1>Análisis de Problemas</h1>
+      </header>
+      <main className="app-main">
+        <form className="problem-form">
+          <div className="input-group">
+            <label htmlFor="problem-input">Ingresa la problemática:</label>
+            <input
+              id="problem-input"
+              type="text"
+              value={problem}
+              onChange={handleInputChange}
+              placeholder="Describe el problema aquí"
+            />
+          </div>
+          <div className="button-group">
+            <button type="submit" onClick={(e) => handleSubmit(e, 'FODA')}>FODA</button>
+            <button type="submit" onClick={(e) => handleSubmit(e, 'CATWDA')}>CATWDA</button>
+            <button type="submit" onClick={(e) => handleSubmit(e, 'ISHIKAWA')}>ISHIKAWA</button>
+            <button type="submit" onClick={(e) => handleSubmit(e, 'PARETO')}>D. PARETO</button>
+            <button type="submit" onClick={(e) => handleSubmit(e, 'SEIS')}>6 sombreros</button>
+          </div>
+        </form>
+        <div className="diagram-container">
+          {selectedAnalysis === 'FODA' && <Foda problem={problem} />}
+          {selectedAnalysis === 'CATWDA' && <CATWOEForm />}
+          {selectedAnalysis === 'ISHIKAWA' && <IshikawaDiagram problem={problem} />}
+          {selectedAnalysis === 'PARETO' && <ParetoChart />}
+          {selectedAnalysis === 'SEIS' && <SixThinkingHats />}
+        </div>
+      </main>
     </div>
   );
 }
