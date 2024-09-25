@@ -3,13 +3,27 @@ import React, { useState } from 'react';
 import Foda from './diagrams/FODA';
 import IshikawaDiagram from './diagrams/ISHIKAWA';
 import ParetoChart from './diagrams/PARETO';
-import SixThinkingHats from './diagrams/SEISS.js';
+// import SixThinkingHats from './diagrams/SEISS.js';
 import CATWOEForm from './diagrams/CAT.js';
+
+import ImageCollage from './collages/ImageCollage.js';
+
 import './App.css'; // Asegúrate de crear este archivo CSS
 
 function App() {
   const [problem, setProblem] = useState('');
   const [selectedAnalysis, setSelectedAnalysis] = useState('');
+  const imageUrls = [
+    {src: './collage/1.jpg', description: 'ss'},
+    {src: './collage/2.jpg', description: 'ss'},
+    {src: './collage/3.jpg', description: 'ss'},
+    {src: './collage/4.jpg', description: 'ss'},
+    {src: './collage/5.jpg', description: 'ss'},
+    {src: './collage/6.jpg', description: 'ss'},
+    {src: './collage/7.jpg', description: 'ss'},
+    {src: './collage/8.jpg', description: 'ss'},
+    {src: './collage/9.jpg', description: 'ss'}
+  ];
 
   const handleInputChange = (e) => {
     setProblem(e.target.value);
@@ -47,6 +61,7 @@ function App() {
             <button type="submit" onClick={(e) => handleSubmit(e, 'ISHIKAWA')}>ISHIKAWA</button>
             <button type="submit" onClick={(e) => handleSubmit(e, 'PARETO')}>D. PARETO</button>
             <button type="submit" onClick={(e) => handleSubmit(e, 'SEIS')}>6 sombreros</button>
+            <button type="submit" onClick={(e) => handleSubmit(e, 'Collage')}>Collage</button>
           </div>
         </form>
         <div className="diagram-container">
@@ -54,7 +69,7 @@ function App() {
           {selectedAnalysis === 'CATWDA' && <CATWOEForm />}
           {selectedAnalysis === 'ISHIKAWA' && <IshikawaDiagram problem={problem} />}
           {selectedAnalysis === 'PARETO' && <ParetoChart />}
-          {selectedAnalysis === 'SEIS' && <SixThinkingHats />}
+          {selectedAnalysis === 'Collage' && <ImageCollage images={imageUrls} />}
         </div>
       </main>
     </div>
